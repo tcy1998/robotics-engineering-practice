@@ -14,18 +14,20 @@ document.querySelectorAll('.rail-wrap').forEach((wrap) => {
     moved = false;
     startX = event.clientX;
     startScroll = rail.scrollLeft;
-    rail.setPointerCapture(event.pointerId);
-    rail.classList.add('dragging');
   });
   rail.addEventListener('pointermove', (event) => {
     if (!active) return;
     const distance = event.clientX - startX;
-    if (Math.abs(distance) > 6) moved = true;
-    rail.scrollLeft = startScroll - distance;
+    if (Math.abs(distance) > 6 && !moved) {
+      moved = true;
+      rail.setPointerCapture(event.pointerId);
+      rail.classList.add('dragging');
+    }
+    if (moved) rail.scrollLeft = startScroll - distance;
   });
   rail.addEventListener('pointerup', (event) => {
     active = false;
-    rail.releasePointerCapture(event.pointerId);
+    if (rail.hasPointerCapture(event.pointerId)) rail.releasePointerCapture(event.pointerId);
     rail.classList.remove('dragging');
   });
   rail.addEventListener('pointercancel', () => {
