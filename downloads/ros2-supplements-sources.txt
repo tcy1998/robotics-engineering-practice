@@ -1,0 +1,10 @@
+ROS 2 supplementary courseware attribution
+
+Files: week02-supplement-01-build-communication.pptx and week02-supplement-02-tf-debugging.pptx
+Adapted from ROS-Industrial ROS 2 training materials by Fraunhofer IPA.
+Original source: https://github.com/ros-industrial/ros2_i_training
+Original license: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+Changes: Chinese rewriting, abridgement, editable PowerPoint layout, and ROS 2 Humble examples and debugging guidance.
+The original training was supported by ROSIN under EU Horizon 2020 grant agreement 732287.
+Attribution does not imply endorsement. Per-slide source references remain in PowerPoint speaker notes.
