@@ -26,7 +26,7 @@ jobs:
       - name: Assemble website
         run: |
           mkdir -p _site/downloads
-          cp index.html style.css script.js .nojekyll _site/
+          cp index.html papers.html style.css script.js .nojekyll _site/
           cp -R downloads/. _site/downloads/
       - uses: actions/upload-pages-artifact@v3
         with:
