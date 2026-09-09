@@ -29,20 +29,39 @@
 
 <article class="week-card" id="week02"><div class="week-title"><span>W02</span><div><small>第 2 周</small><h3>Ubuntu 与 ROS2 环境</h3></div></div><div class="rail-wrap"><div class="rail-controls"><span>5 份资料</span><div><button aria-label="向左查看第2周课件">←</button><button aria-label="向右查看第2周课件">→</button></div></div><div class="materials"><a class="material available" href="downloads/week02-chapters-01-07.pptx?v=20260904-1920" download><b>↓</b><span><strong>第 1–7 章合并课件</strong><small>PPTX · 112 页 · 点击下载</small></span></a><a class="material available" href="downloads/week02-supplement-01-build-communication.pptx" download><b>↓</b><span><strong>补充 01 · 工程构建与通信基础</strong><small>PPTX · 13 页 · 点击下载</small></span></a><a class="material available" href="downloads/week02-supplement-02-tf-debugging.pptx" download><b>↓</b><span><strong>补充 02 · 坐标系统与实验调试</strong><small>PPTX · 13 页 · 点击下载</small></span></a><div class="material pending"><b>—</b><span><strong>课件 04</strong><small>待更新</small></span></div><div class="material pending"><b>—</b><span><strong>课件 05</strong><small>待更新</small></span></div></div></div></article>
 
-        <article class="week-card" id="week02-lab">
-          <div class="week-title"><span>LAB</span><div><small>第 2 周实验 · Lab Manual</small><h3>Linux 实验手册</h3></div></div>
-          <div class="rail-wrap">
-            <div class="rail-controls"><span>7 份 PDF · 按课次阅读</span><div><button aria-label="向左查看第2周实验手册">←</button><button aria-label="向右查看第2周实验手册">→</button></div></div>
-            <div class="materials">
-              <a class="material available" href="downloads/lab02/01-linux-introduction.pdf" download><b>↓</b><span><strong>01 Linux 系统简介</strong><small>PDF · 6 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/02-windows-virtual-machine.pdf" download><b>↓</b><span><strong>02 Windows 下的环境配置</strong><small>PDF · 10 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/03-ubuntu-installation.pdf" download><b>↓</b><span><strong>03 Linux 系统安装及换源</strong><small>PDF · 67 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/04-linux-basics.pdf" download><b>↓</b><span><strong>04 Linux 基本操作</strong><small>PDF · 13 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/05-linux-directories.pdf" download><b>↓</b><span><strong>05 Linux 目录介绍</strong><small>PDF · 5 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/06-linux-commands.pdf" download><b>↓</b><span><strong>06 Linux 常见指令</strong><small>PDF · 8 页 · 点击下载</small></span></a>
-              <a class="material available" href="downloads/lab02/07-linux-permissions.pdf" download><b>↓</b><span><strong>07 Linux 权限介绍</strong><small>PDF · 7 页 · 点击下载</small></span></a>
-            </div>
-<details class="lab-notes"><summary>本周实验任务</summary><p><strong>本周目标：</strong>完成 Ubuntu 实验环境配置，熟悉 Linux 的目录、终端命令和权限管理，为后续 ROS 2 实验准备可用环境。</p><ol><li>根据自己的电脑选择一种虚拟机方案，按照本页实验手册安装 Ubuntu 并完成软件源配置。不需要同时安装多种虚拟机。修改磁盘或虚拟化设置前，请先备份重要文件。</li><li>完成 Linux 基本操作、目录结构、常用命令和权限管理练习。请保存关键命令与运行结果；遇到问题时，记录报错画面、系统与软件版本以及已经完成的步骤。</li><li>实验中使用自己的普通账户和 <code>sudo</code> 执行需要管理员权限的操作，不要启用 root 登录，也不要修改实验室公共设备的账户密码。第 7 份手册中“root 密码每次重启随机生成”的说法不准确，请以 <a href="https://help.ubuntu.com/community/RootSudo" target="_blank" rel="noopener noreferrer">Ubuntu 权限说明</a> 为准。</li></ol><p><strong>提前完成实验的同学：</strong>请进入<a href="papers.html">第一次论文选读</a>页面，从本期推荐中选择感兴趣的论文开始阅读。可以阅读一篇，也可以阅读多篇。</p><p><strong>第一周作业：</strong>完成一份论文阅读报告。论文数量不限，可以围绕一篇论文深入分析，也可以比较多篇论文。报告至少应说明论文研究的问题、主要方法、实验或结果、你的理解，以及它与机器人课程内容的联系。不要只翻译摘要。</p><p>请使用 Overleaf 和 LaTeX 编写报告并导出 PDF。通过这次作业开始熟悉文档结构、章节标题、数学公式、表格、图片与题注、交叉引用及参考文献的编辑方法。提交方式与截止时间以课堂通知为准。</p></details>
+        <article class="week-card lab-week" id="week02-lab">
+          <div class="week-title"><span>LAB<br>02</span><div><small>第 2 周 · 两次实验课</small><h3>环境配置与 ROS2 基础</h3></div></div>
+          <div class="lab-sessions">
+            <section class="lab-session">
+              <div class="session-heading"><span>实验课 1</span><div><h4>Ubuntu 与 Linux 基础</h4><p>完成实验环境配置，熟悉目录、终端命令与权限管理。</p></div></div>
+              <details class="resource-group">
+                <summary>查看 7 份分课实验手册</summary>
+                <div class="rail-wrap">
+                  <div class="rail-controls"><span>按需要阅读和下载</span><div><button aria-label="向左查看实验课1手册">←</button><button aria-label="向右查看实验课1手册">→</button></div></div>
+                  <div class="materials">
+                    <a class="material available" href="downloads/lab02/01-linux-introduction.pdf" download><b>↓</b><span><strong>01 Linux 系统简介</strong><small>PDF · 6 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/02-windows-virtual-machine.pdf" download><b>↓</b><span><strong>02 Windows 下的环境配置</strong><small>PDF · 10 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/03-ubuntu-installation.pdf" download><b>↓</b><span><strong>03 Linux 系统安装及换源</strong><small>PDF · 67 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/04-linux-basics.pdf" download><b>↓</b><span><strong>04 Linux 基本操作</strong><small>PDF · 13 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/05-linux-directories.pdf" download><b>↓</b><span><strong>05 Linux 目录介绍</strong><small>PDF · 5 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/06-linux-commands.pdf" download><b>↓</b><span><strong>06 Linux 常见指令</strong><small>PDF · 8 页</small></span></a>
+                    <a class="material available" href="downloads/lab02/07-linux-permissions.pdf" download><b>↓</b><span><strong>07 Linux 权限介绍</strong><small>PDF · 7 页</small></span></a>
+                  </div>
+                </div>
+              </details>
+              <details class="lab-notes"><summary>实验课 1任务</summary><p><strong>实验目标：</strong>完成 Ubuntu 实验环境配置，掌握 Linux 的基本操作，为后续 ROS2 实验准备可用环境。</p><ol><li>根据自己的电脑选择一种虚拟机方案，安装 Ubuntu 并完成软件源配置。不需要同时安装多种虚拟机；修改磁盘或虚拟化设置前，请先备份重要文件。</li><li>完成目录结构、常用终端命令和权限管理练习，保存关键命令与运行结果。遇到问题时，记录报错画面、系统与软件版本以及已经完成的步骤。</li><li>使用普通账户和 <code>sudo</code> 执行需要管理员权限的操作，不要启用 root 登录，也不要修改实验室公共设备的账户密码。</li></ol><p><strong>提前完成实验的同学：</strong>请进入<a href="papers.html">第一次论文选读</a>页面开始阅读。</p><p><strong>第一周作业：</strong>选择一篇或多篇论文完成阅读报告，使用 Overleaf 和 LaTeX 编写并导出 PDF。报告应说明研究问题、主要方法、实验结果和个人理解，不要只翻译摘要。提交方式与截止时间以课堂通知为准。</p></details>
+            </section>
+
+            <section class="lab-session session-featured">
+              <div class="session-heading"><span>实验课 2</span><div><h4>Docker 与 ROS2 基础</h4><p>先完成核心操作，再根据进度阅读拓展章节；无需在一节课内逐页完成全部手册。</p></div></div>
+              <div class="session-downloads">
+                <a class="resource-card" href="downloads/lab02/session2/docker-course-complete.pdf?v=20260909" download><b>PDF</b><span><strong>Docker 基础合并手册</strong><small>8 课 · 50 页 · 含章节书签</small></span><i>↓</i></a>
+                <a class="resource-card" href="downloads/lab02/session2/ros2-basics-complete.pdf?v=20260909" download><b>PDF</b><span><strong>ROS2 基础合并手册</strong><small>20 课 · 217 页 · 含章节书签</small></span><i>↓</i></a>
+                <a class="resource-card" href="downloads/lab02/session2/ros2-example-source.zip?v=20260909" download><b>ZIP</b><span><strong>ROS2 配套示例代码</strong><small>节点、通信、Launch、TF2 与 URDF</small></span><i>↓</i></a>
+              </div>
+              <details class="resource-index"><summary>查看手册内容与建议阅读顺序</summary><div class="course-outline"><div><h5>Docker 手册</h5><p><strong>核心：</strong>介绍与安装、hello-world、容器使用、硬件与数据交互、Docker 中安装 ROS。</p><p><strong>拓展：</strong>镜像发布、容器日常管理与 Docker 仓库。</p></div><div><h5>ROS2 手册</h5><p><strong>核心：</strong>安装、命令行、工作空间、功能包、节点、话题、服务与动作。</p><p><strong>拓展：</strong>参数、DDS、Launch、TF2、URDF、Gazebo、Rviz 与 RQT。</p></div></div></details>
+              <details class="lab-notes"><summary>实验课 2任务</summary><p><strong>实验目标：</strong>理解容器化开发环境的基本思路，完成 ROS2 工作空间与基础通信实验。</p><ol><li><strong>Docker 基础：</strong>完成 Docker 安装与 <code>hello-world</code> 测试，练习镜像、容器和目录映射等基本操作，并尝试在容器中运行 ROS2 环境。</li><li><strong>ROS2 基础：</strong>创建工作空间和功能包，运行节点、话题发布/订阅以及服务或动作示例；使用相应的 <code>ros2</code> 命令检查节点和通信状态。</li><li><strong>实验记录：</strong>保留关键命令、运行结果和必要截图。遇到问题时记录完整报错、ROS2 版本、运行环境及已经尝试的解决方法。</li></ol><p><strong>拓展任务：</strong>完成较快的同学可以继续练习 Launch、TF2、URDF、Rviz 或 RQT，也可以进入<a href="papers.html">第一次论文选读</a>页面继续阅读论文。</p></details>
+            </section>
           </div>
         </article>
 
