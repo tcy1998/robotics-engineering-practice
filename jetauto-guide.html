@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JetAuto 官方课程目录与机器人连接指南，供机器人工程实践实验课使用">
+  <title>JetAuto 课程目录与连接指南｜机器人工程实践</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .guide{max-width:1100px;margin:0 auto;padding:52px 24px 88px}
+    .guide-hero{padding:42px;border:1px solid #cfe4e8;border-radius:20px;background:linear-gradient(135deg,#eaf6f7,#fff)}
+    .guide-hero .eyebrow{margin:0 0 12px;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.12em}
+    .guide-hero h1{font-size:clamp(32px,5vw,54px);line-height:1.2;letter-spacing:-.04em}
+    .guide-hero p{max-width:800px;color:var(--muted);line-height:1.8}
+    .guide-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    .guide-nav a{padding:8px 12px;border:1px solid #bddce1;border-radius:999px;background:#fff;color:var(--blue);font-size:13px;font-weight:700}
+    .guide-section{margin-top:36px;padding:30px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .guide-section h2{margin:0 0 16px;font-size:27px}
+    .guide-section h3{margin:28px 0 12px;font-size:18px}
+    .guide-section p,.guide-section li{line-height:1.85}
+    .guide-section li+li{margin-top:7px}
+    .guide-section ol,.guide-section ul{padding-left:24px}
+    .guide-section a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+    .guide-section code{padding:2px 5px;border-radius:4px;background:#edf3f5;font-family:Consolas,monospace;overflow-wrap:anywhere}
+    .guide-section table{width:100%;border-collapse:collapse;margin:15px 0;display:block;overflow-x:auto}
+    .guide-section th,.guide-section td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top;line-height:1.65;min-width:130px}
+    .guide-section th{background:#eef7f8}
+    .guide-callout{padding:14px 18px;border-left:4px solid var(--blue);border-radius:0 8px 8px 0;background:#f1f8f9;line-height:1.8}
+    .guide-callout.warning{border-color:#c77528;background:#fff7ed}
+    .guide-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:20px}
+    .guide-steps div{padding:15px;border:1px solid #d1e5e8;border-radius:10px;background:#fff;font-size:13px;line-height:1.6}
+    .guide-steps strong{display:block;margin-bottom:5px;color:var(--blue)}
+    .directory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .directory-grid section{padding:18px;border:1px solid var(--line);border-radius:12px;background:#fafcfc}
+    .directory-grid h3{margin:0 0 10px;font-size:17px}
+    .directory-grid ul{margin:0;font-size:13px}
+    .directory-grid li+li{margin-top:2px}
+    .directory-grid .wide{grid-column:1/-1}
+    .guide-small{font-size:13px;color:var(--muted)}
+    @media(max-width:750px){.guide{padding:25px 14px 60px}.guide-hero,.guide-section{padding:22px}.guide-steps,.directory-grid{grid-template-columns:1fr}.directory-grid .wide{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html#week05-lab"><span class="brand-mark">RE</span><span>机器人工程实践</span></a>
+    <a class="outline-link" href="index.html#week05-lab">返回 JetAuto 实验</a>
+  </header>
+  <main class="guide">
+    <div class="guide-hero">
+      <p class="eyebrow">JETAUTO · EXPERIMENT GUIDE</p>
+      <h1>JetAuto 课程目录与连接指南</h1>
+      <p>根据幻尔 JetAuto-JetsonNano 在线文档左侧目录和《机器人快速使用手册》整理。先按下方步骤连接并确认设备，再进入 <a href="index.html#week05-lab">LAB 05 底盘运动控制实验</a>。本页是课堂导航和操作要点，不替代厂商的完整图文教程。</p>
+      <nav class="guide-nav" aria-label="本页目录">
+        <a href="#prepare">开机检查</a><a href="#connect">连接机器人</a><a href="#ros2">进入 ROS2</a><a href="#troubleshoot">常见问题</a><a href="#directory">完整课程目录</a>
+      </nav>
+      <div class="guide-steps" aria-label="实验顺序"><div><strong>01 开机</strong>检查电量与场地，等待启动完成</div><div><strong>02 联网</strong>确认 AP 直连或局域网模式</div><div><strong>03 远程连接</strong>选择 NoMachine、VNC 或 SSH</div><div><strong>04 实验</strong>打开正确的 ROS2 终端</div></div>
+    </div>
+
+    <section class="guide-section" id="prepare">
+      <h2>一、开机前与启动完成的判断</h2>
+      <ol>
+        <li>把机器人放在平整地面，远离桌边，检查车轮、主控、雷达与线缆。若带机械臂，避免开机时机械臂被压住或堵转。</li>
+        <li>电池电压低于 <strong>10 V</strong> 或扩展板蜂鸣器发出低电量报警时，先充电。使用随套件提供的充电器；充电时关闭机器人，不要边充电边运行，也不要把充电器插到 Jetson Nano 主板的 DC 供电口。</li>
+        <li>按下电源开关后，扩展板蓝色 LED1 闪烁只表示网络配置服务已开启。<strong>等蜂鸣器短鸣一声</strong>，再开始连接 ROS 系统。</li>
+        <li>出厂默认 AP 直连模式通常会出现以 <code>HW</code> 开头的热点。若 LED1 常亮，设备可能处于局域网模式；先确认当前模式，不要把示例局域网 IP 当成固定 IP。</li>
+      </ol>
+      <p class="guide-callout warning">多人在同一场地使用手柄时可能发生互串、误控。真机速度实验应保留充足空地，并准备可随时发送零速度指令的第二个终端。</p>
+    </section>
+
+    <section class="guide-section" id="connect">
+      <h2>二、怎么连接机器人</h2>
+      <h3>先认清主控与连接工具</h3>
+      <table><thead><tr><th>主控</th><th>图形桌面</th><th>命令行</th><th>官方出厂账号示例</th></tr></thead><tbody>
+        <tr><td>Jetson Nano</td><td>NoMachine</td><td>MobaXterm / SSH</td><td><code>jetauto</code> / <code>hiwonder</code></td></tr>
+        <tr><td>Jetson Orin Nano / Orin NX</td><td>NoMachine</td><td>MobaXterm / SSH</td><td><code>ubuntu</code> / <code>ubuntu</code></td></tr>
+        <tr><td>Raspberry Pi 5</td><td>VNC</td><td>MobaXterm / SSH</td><td><code>pi</code> / <code>raspberrypi</code></td></tr>
+      </tbody></table>
+      <p class="guide-small">上表是官方文档给出的出厂示例。实验室若更改过账号、密码或镜像，请以设备管理员提供的信息为准。Jetson Orin Nano / Orin NX 用 NoMachine 前，官方要求连接外接屏幕或虚拟显示器。台式电脑若需连接机器人 5G Wi-Fi，应准备支持 5G 频段的无线网卡。</p>
+
+      <h3>方式 A：AP 直连，课堂优先使用</h3>
+      <ol>
+        <li>电脑连接机器人生成的 <code>HW…</code> Wi-Fi；官方默认热点密码为 <code>hiwonder</code>。该模式不能通过机器人热点访问外网。</li>
+        <li>Jetson 主控打开 NoMachine，连接 <code>192.168.149.1</code>；树莓派 5 打开 VNC，连接同一个地址。只需要命令行时，可用 MobaXterm 新建 SSH 会话并填入该地址。</li>
+        <li>按主控型号输入账号和密码。连接成功后，先确认看到的是机器人系统桌面或 SSH 提示符，再继续操作。</li>
+      </ol>
+
+      <h3>方式 B：STA 局域网，适合同时需要联网</h3>
+      <ol>
+        <li>手机先连实验室 Wi-Fi。打开 WonderAi，选对 JetAuto / JetAuto Pro 型号，在“+”中选择“局域网模式”，输入该 Wi-Fi 的密码。</li>
+        <li>按 APP 提示临时连接机器人的 <code>HW…</code> 热点，等待机器人接入局域网。官方文档中 LED1 常亮对应局域网模式。</li>
+        <li>长按 APP 内的机器人图标，查看实际分配的 IP。让电脑连接同一局域网，再把<strong>这个实际 IP</strong>填入 NoMachine、VNC 或 SSH。官方示例中的 <code>192.168.11.134</code> 不是固定地址。</li>
+        <li>需要切回 AP 直连模式时，可按官方说明长按扩展板 KEY1，直到蓝灯重新闪烁。切换网络后原远程会话可能断开，应使用新模式的地址重连。</li>
+      </ol>
+
+      <h3>方式 C：USB 固定 IP，供 Jetson 主控选用</h3>
+      <p>官方还介绍了 USB 网络连接：Jetson Nano 使用 Micro-USB，Jetson Orin Nano 使用 Type-C，配置好远程 NDIS 网络设备后使用 <code>192.168.55.1</code>。这一方法不适用于树莓派 5；第一次上课建议先用 AP 直连。</p>
+    </section>
+
+    <section class="guide-section" id="ros2">
+      <h2>三、进入正确的 ROS2 环境</h2>
+      <ul>
+        <li><strong>Jetson Nano：</strong>桌面上分别有 ROS1 和 ROS2 终端入口。本次底盘实验必须打开 ROS2 终端；如果命令或功能包找不到，先检查是否误开了 ROS1 终端。</li>
+        <li><strong>Jetson Orin Nano / Orin NX：</strong>官方说明桌面只有 ROS2 终端。</li>
+        <li><strong>Raspberry Pi 5：</strong>优先使用桌面上带机器人 ROS2 环境的终端，不要把系统任务栏里的普通终端误当成课程终端。</li>
+      </ul>
+      <p>进入终端后，先运行 <code>ros2 node list</code> 与 <code>ros2 topic list</code>。接着查看 <a href="index.html#week05-lab">LAB 05 实验步骤</a>，根据实机实际话题名启动底盘控制和观测数据。不同主控与镜像版本可能把工作空间放在不同位置；本页不要求重新安装 ROS2 或改写系统配置。</p>
+      <p class="guide-callout">厂商文档说明整机出厂前已经完成 IMU 与运动参数标定。普通实验只观察数据与低速控制；只有设备出现明显直行或转向偏差时，才在指导教师确认后进行标定。</p>
+    </section>
+
+    <section class="guide-section" id="troubleshoot">
+      <h2>四、连接失败时先查这几项</h2>
+      <table><thead><tr><th>现象</th><th>先检查</th></tr></thead><tbody>
+        <tr><td>找不到 <code>HW…</code> 热点</td><td>确认已等待蜂鸣器短鸣；观察 LED1。常亮可能是局域网模式，蓝灯闪烁才对应出厂 AP 模式。若无法确定状态，请联系指导教师。</td></tr>
+        <tr><td>NoMachine / VNC 连不上</td><td>核对主控型号、连接工具和网络模式；AP 用 <code>192.168.149.1</code>，局域网用 APP 显示的实际 IP。Orin 设备还应检查外接屏幕或虚拟显示器。</td></tr>
+        <tr><td>能登录但 ROS2 命令报错</td><td>确认打开的是 ROS2 终端；Jetson Nano 同时有 ROS1、ROS2 环境。再检查课程功能包是否存在于当前镜像。</td></tr>
+        <tr><td>机器人仍在运动</td><td>不要只按 <code>Ctrl+C</code>；在另一个 ROS2 终端向当前速度控制话题发送各分量为零的 <code>Twist</code>，目视确认停车。</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="guide-section" id="directory">
+      <h2>五、官方左侧课程目录</h2>
+      <p class="guide-small">以下按 2026 年 10 月 7 日 Chrome 中显示的 JetAuto-JetsonNano 中文目录抄录章节标题。这里只核对了目录、快速使用手册中与实验连接有关的内容，以及第 15 章相关文字；其他章节的正文请进入官方页面查看。</p>
+      <div class="directory-grid">
+        <section class="wide"><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/1.%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html" target="_blank" rel="noopener">1. 机器人快速使用手册</a></h3><ul><li>1.1 JetAuto版本说明</li><li>1.2 配件安装及开机准备</li><li>1.3 首次开机</li><li>1.4 充电说明及锂电池使用注意</li><li>1.5 手机APP控制</li><li>1.6 开发环境搭建及配置</li><li>1.7 无线手柄遥控</li><li>1.8 手动建图体验</li><li>1.9 自主建图体验</li><li>1.10 自主导航体验</li><li>1.11 硬件介绍</li><li>1.12 ROS使用介绍</li><li>1.13 系统软件架构说明</li><li>1.14 STM32源码说明</li><li>1.15 镜像烧录教程</li></ul></section>
+        <section><h3>2. 开发基础课程</h3><p>官方侧栏未展开子目。</p></section>
+        <section><h3>3. ROS1-ROS基础课程</h3><p>官方侧栏未展开子目。</p></section>
+        <section><h3>4. ROS1-底盘运动控制课程</h3><ul><li>4.1 运动学分析</li><li>4.2 运动控制</li></ul></section>
+        <section><h3>5. ROS1-激光雷达课程</h3><ul><li>5.1 激光雷达介绍</li><li>5.2 雷达工作原理及测距方法</li><li>5.3 雷达避障</li><li>5.4 雷达跟随</li><li>5.5 雷达警卫</li></ul></section>
+        <section><h3>6. ROS1-深度相机基础课程</h3><p>官方侧栏未展开子目。</p></section>
+        <section><h3>7. ROS1-建图与导航教程</h3><ul><li>7.1 建图教程</li><li>7.2 导航教程</li></ul></section>
+        <section><h3>8. ROS1-多级编队</h3><ul><li>8.1 多机编队手册</li><li>8.2 多机编队程序分析</li></ul></section>
+        <section><h3>9. ROS1-ROS+OpenCV课程</h3><ul><li>9.1 颜色识别实验</li><li>9.2 颜色阈值的调节</li><li>9.3 二维码创建及识别</li><li>9.4 AprilTag标签识别</li><li>9.5 AR视觉</li><li>9.6 自主巡线</li><li>9.7 KCF物体追踪</li></ul></section>
+        <section><h3>10. ROS1-ROS+机器学习课程</h3><ul><li>10.1 机器学习基础课程</li><li>10.2 机器学习应用</li><li>10.3 MediaPipe人机交互</li><li>10.4 无人驾驶课程</li><li>10.5 无人驾驶课程</li></ul></section>
+        <section><h3>11. ROS1-URDF模型入门</h3><ul><li>11.1 URDF模型入门</li><li>11.2 Moveit仿真</li><li>11.3 Gazebo仿真</li></ul></section>
+        <section><h3>12. ROS1-语音控制课程</h3><ul><li>12.1 语音基础课程</li><li>12.2 六路环形麦克风安装</li><li>12.3 语音交互应用</li><li>12.4 中英文唤醒词切换</li></ul></section>
+        <section><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/13.ROS2-ROS2%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B.html" target="_blank" rel="noopener">13. ROS2-ROS2基础课程</a></h3></section>
+        <section><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/14.ROS2-Docker%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B.html" target="_blank" rel="noopener">14. ROS2-Docker容器基础课程</a></h3></section>
+        <section><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/15.ROS2-%E5%BA%95%E7%9B%98%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E8%AF%BE%E7%A8%8B.html" target="_blank" rel="noopener">15. ROS2-底盘运动控制课程</a></h3><ul><li>15.1 运动学分析</li><li>15.2 机器人运动控制</li></ul></section>
+        <section><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/16.ROS2-%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE%E8%AF%BE%E7%A8%8B.html" target="_blank" rel="noopener">16. ROS2-激光雷达课程</a></h3><ul><li>16.1 激光雷达介绍</li><li>16.2 雷达工作原理及测距方法</li><li>16.3 雷达避障</li><li>16.4 雷达跟随</li><li>16.5 雷达警卫</li></ul></section>
+        <section><h3>17. ROS2-深度相机基础课程</h3></section>
+        <section><h3><a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/18.ROS2-%E5%BB%BA%E5%9B%BE%E4%B8%8E%E5%AF%BC%E8%88%AA%E8%AF%BE%E7%A8%8B.html" target="_blank" rel="noopener">18. ROS2-建图与导航教程</a></h3><ul><li>18.1 建图教程</li><li>18.2 导航教程</li></ul></section>
+        <section><h3>19. ROS2-ROS+OpenCV课程</h3><ul><li>19.1 颜色阈值的调节</li><li>19.2 颜色识别实验</li><li>19.3 二维码创建及识别</li><li>19.4 自主巡线</li></ul></section>
+        <section class="wide"><h3>20.1–20.4 ROS2 专题（官网侧栏分别列出）</h3><ul><li>20.1 MediaPipe人机交互：简介及入门、背景分割、3D物体检测、人脸检测、三维人脸检测、手关键点检测、肢体关键点检测、指尖轨迹识别、肢体体感控制、人体跟踪、肢体姿态融合RGB控制、人体姿态检测</li><li>20.2 机器学习基础：机器学习介绍、机器学习库介绍</li><li>20.3 机器学习应用：GPU加速、TensorRT加速、YOLO26模型与运行流程、图像采集和标注、数据格式转换、训练模型、TensorRT推理加速、交通标志模型训练</li><li>20.4 无人驾驶课程：车道保持、路标检测、红绿灯识别、转向决策、自主泊车、综合应用</li></ul></section>
+        <section><h3>21. ROS2-语音控制课程</h3><ul><li>21.1 语音基础课程</li><li>21.2 语音交互应用</li></ul></section>
+        <section><h3>22. ROS2-MoveIt及Gazebo仿真</h3></section>
+        <section><h3>23. OpenClaw实践教程</h3><ul><li>23.1 准备工作</li><li>23.2 大模型API-Key获取及配置</li><li>23.3 配置飞书</li><li>23.4 OpenClaw基础应用</li><li>23.5 OpenClaw综合应用</li></ul></section>
+        <section><h3>附录</h3></section>
+      </div>
+    </section>
+  </main>
+  <footer><span>机器人工程实践 · Robotics Engineering Practice</span><span>山东大学人工智能学院 · 2026</span></footer>
+</body>
+</html>
