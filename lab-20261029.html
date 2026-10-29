@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>10月29日实验｜STA联网与AI应用初探</title>
+  <link rel="stylesheet" href="style.css">
+  <style>.manual{max-width:900px;margin:auto;padding:42px 24px 72px}.manual h1{font-size:clamp(28px,5vw,44px);line-height:1.3;letter-spacing:0}.manual h2{font-size:21px;margin-top:30px}.manual p,.manual li{line-height:1.85;font-size:15px}.manual li+li{margin-top:7px}.manual a{color:var(--blue);text-decoration:underline}.manual pre{padding:15px;background:#eef4f6;overflow:auto;border-radius:8px;line-height:1.8}.manual code{overflow-wrap:anywhere}.note{padding:12px 16px;background:#eef8f8;border-left:3px solid var(--blue);border-radius:6px}.manual small{color:var(--muted)}@media print{header,.print-button{display:none}.manual{padding:0;max-width:none}.manual h2{break-after:avoid}.manual pre{white-space:pre-wrap}}</style>
+</head>
+<body class="reading-page">
+  <header><a class="brand" href="index.html"><span class="brand-mark">RE</span><span>机器人工程实践</span></a><a class="outline-link" href="index.html#lab-20261029">返回实验入口</a></header>
+  <main class="manual">
+    <p class="school">2026年10月29日 · 实验手册</p>
+    <h1>STA 联网、远程连接与 AI 应用初探</h1>
+    <p class="note"><strong>本次目标：</strong>让机器人和电脑加入同一热点，查到机器人实际 IP 并完成远程连接，为后续大模型应用准备网络环境。完成联网后，尝试在机器人端调用 AI API 或运行 AI Agent，记录可用情况与问题。</p>
+
+    <h2>一、准备设备与网络</h2>
+    <p>准备机器人、电脑、可上网的手机热点或路由器，以及显示器、HDMI 线和键盘鼠标。检查机器人电量，将机器人放稳；本次联网和 AI 测试保持底盘静止。</p>
+    <ol>
+      <li>开启一个供本组使用的热点，记录名称与密码。电脑和机器人都连接该热点；如果电脑自身开热点，机器人连接该热点，电脑作为热点主机即可。</li>
+      <li>确认热点有可用的互联网连接，并允许客户端互相访问。若设备搜不到热点，可尝试切换至设备支持的频段（例如 2.4 GHz）。</li>
+      <li>避免随意重启热点或修改名称、密码。热点关闭、自动休眠或重新分配地址都可能导致远程连接断开。</li>
+    </ol>
+
+    <h2>二、让机器人进入 STA 模式</h2>
+    <p><strong>AP 模式</strong>是机器人自己发出热点；<strong>STA 模式</strong>是机器人作为客户端加入已有 Wi-Fi。本次让机器人加入本组热点，电脑也在同一网络中。</p>
+    <ol>
+      <li>将机器人的 HDMI 输出接到<strong>显示器的 HDMI 输入</strong>，接好键盘鼠标，开机进入机器人系统。多数笔记本的 HDMI 接口是输出口，不能直接当机器人显示器使用。</li>
+      <li>按当前镜像提供的联网方式切换 STA。使用 WonderAi 的设备，可参考<a href="jetauto-guide.html#connection">课程机器人连接指南</a>中的“方式 B：STA 局域网”：打开 APP，选择对应型号，在“+”中选择“局域网模式”，填写本组热点信息，并按 APP 提示完成配网。若手机自身提供热点，建议用另一台设备配网，或在机器人本地操作。</li>
+      <li>如果当前镜像使用系统桌面管理 Wi-Fi，可在机器人桌面的网络菜单中选择本组热点并连接。若厂商网络程序正在管理无线网卡，请按对应镜像的配网流程操作；遇到冲突先请教师协助。</li>
+      <li>切换网络时，原来的 AP 远程会话可能断开。完成后在机器人本地确认已连接目标热点；不要继续使用 AP 模式的旧地址。</li>
+    </ol>
+
+    <h2>三、在机器人端查看 IP，并远程连接</h2>
+    <p>在机器人本地终端执行：</p>
+    <pre><code>hostname -I
+ip -br addr
+ip route</code></pre>
+    <p>找出连接本组热点的无线网卡及其 IPv4 地址，可结合桌面网络详情确认。不要把 <code>127.0.0.1</code>、Docker 网桥地址或 USB 网卡地址当作热点地址。记录机器人编号、热点名称、网卡名称和 IP；地址可能在重新联网后改变。</p>
+    <ol>
+      <li>在电脑上用 <code>ping 机器人实际IP</code> 检查网络；若不响应，也需结合远程软件检查，因为部分网络会限制 ping。</li>
+      <li>Jetson 设备可尝试 NoMachine，配置了 VNC 的设备可使用 VNC；只需终端时可使用 SSH：<code>ssh 用户名@机器人实际IP</code>。以机器人已启用的服务和实际账户为准。</li>
+      <li>连接成功后，在远程终端运行 <code>hostname</code>，确认操作的是对应机器人。部分镜像需要保持外接显示器或使用适配的虚拟显示器，才能正常显示远程桌面。</li>
+    </ol>
+    <p class="note"><strong>连不上时按顺序检查：</strong>两端是否在同一网络 → IP 是否更新 → 热点是否限制设备互访 → 远程服务是否启动 → 用户名、密码是否正确。先检查配置，不要直接关闭整个防火墙。</p>
+
+    <h2>四、测试 AI API 或 AI Agent</h2>
+    <p>先在<strong>机器人端</strong>确认能访问拟使用服务的官方网站，再依据该服务的官方文档完成一个最小测试。API 调用是机器人通过网络访问远端模型；在机器人本地运行模型还需要另行评估内存、算力和软件兼容性。</p>
+    <ol>
+      <li><strong>查看运行环境：</strong>运行 <code>uname -m</code>、<code>python3 --version</code>、<code>free -h</code> 和 <code>df -h</code>。记录架构、Python 版本、内存与磁盘空间。安装工具前检查其是否支持机器人系统及 ARM64 等实际架构。</li>
+      <li><strong>API 基础测试：</strong>选择一个有权限使用的 AI API，按官方示例发送一句文字问题，例如“请解释机器人 STA 联网的用途”。记录服务与模型名称、是否返回结果、响应时间及报错。使用 Python 时建议建立独立虚拟环境，避免修改 ROS 的系统依赖。</li>
+      <li><strong>Agent 选做：</strong>选择一个支持当前环境的 Agent，先让它给出检查方案，再授权执行 <code>hostname</code>、<code>uname -m</code> 等只读命令，观察它能否识别环境并解释输出。不要授予无人确认的管理员权限。</li>
+      <li><strong>拓展选做：</strong>尝试让模型分析一张不含个人信息的机器人相机图片，或解释一段已经保存的 ROS2 日志。记录输入、输出和延迟，思考后续如何接入感知或任务规划。</li>
+    </ol>
+    <p class="note"><strong>密钥与运动控制：</strong>API 密钥按官方方式放在本机环境变量或私有配置中，不写进报告、截图或公开代码。设置适当用量额度，测试完成后停止程序。本次 Agent 不直接执行底盘运动指令；后续接入运动控制时，需要人工确认、速度限制和独立停车措施。</p>
+
+    <h2>五、本次实验记录</h2>
+    <p>每组保存一份简短记录：① 机器人编号与系统环境；② STA 配网方式及成功界面；③ 实际 IP 与远程连接截图；④ 测试的 API／Agent、运行位置与结果；⑤ 遇到的问题和解决过程。网络名称、IP 等按课堂要求保存，隐藏密码与密钥。</p>
+    <p>完成标准：能够说明 AP 与 STA 的区别，独立查到机器人当前 IP，并通过电脑远程进入机器人。AI 测试记录成功结果或完整失败原因即可；不要求今天完成大模型本地部署。课后说明下一步希望尝试的机器人 AI 功能。</p>
+    <p><small>配网菜单和远程服务以设备当前镜像为准。相关资料：<a href="jetauto-guide.html">课程机器人连接指南</a>；<a href="https://docs.hiwonder.com.cn/projects/JetAuto-JetsonNano/page/1.%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html" target="_blank" rel="noopener">幻尔官方快速使用指南</a>。</small></p>
+    <button class="outline-link print-button" type="button" onclick="window.print()">打印／另存为 PDF</button>
+  </main>
+</body>
+</html>
